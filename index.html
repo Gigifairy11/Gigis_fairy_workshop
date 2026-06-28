@@ -9,15 +9,16 @@
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 
     :root {
-      --paper: #fff9f3;
-      --ink: #4f342d;
-      --muted: #8c6b5e;
-      --rose: #c95f86;
-      --rose-soft: #ffd9e8;
-      --butter: #fff0a8;
-      --gold: #b8872f;
-      --line: rgba(83, 52, 43, .18);
-      --shadow: 0 22px 70px rgba(83, 52, 43, .13);
+      --paper: #fff8ec;
+      --ink: #4d332b;
+      --muted: #8b6a5d;
+      --rose: #d66f8e;
+      --rose-soft: #ffd7df;
+      --butter: #ffe58a;
+      --gold: #c28b32;
+      --line: rgba(87, 55, 44, .24);
+      --shadow: 0 20px 60px rgba(87, 55, 44, .16);
+
       --theme-a: #ffd4a3;
       --theme-b: #fff0bd;
       --theme-c: #e7a86c;
@@ -31,63 +32,261 @@
       color: var(--ink);
       font-family: "Cormorant Garamond", Georgia, serif;
       font-size: 18px;
-      background: linear-gradient(135deg, #fffaf6 0%, #fff0c8 42%, #ffddea 72%, #fff7df 100%);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(255, 215, 223, .7), transparent 24%),
+        radial-gradient(circle at 88% 0%, rgba(255, 229, 138, .76), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(188, 204, 164, .42), transparent 28%),
+        linear-gradient(135deg, #fffaf1, #ffe9c8 48%, #ffdce8);
     }
 
-    /* Mobile Nav Toggle */
-    .nav-toggle { display: none; position: fixed; top: 15px; left: 15px; z-index: 100; background: var(--paper); border: 1px solid var(--line); border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 20px; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image:
+        linear-gradient(rgba(87,55,44,.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(87,55,44,.14) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
 
-    .app { display: grid; grid-template-columns: 295px 1fr; min-height: 100vh; }
+    .app {
+      display: grid;
+      grid-template-columns: 295px 1fr;
+      min-height: 100vh;
+    }
 
     aside {
-      position: sticky; top: 0; height: 100vh; padding: 24px 18px;
-      border-right: 1px solid var(--line); background: rgba(255,248,236,.95);
-      z-index: 50; overflow-y: auto;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 24px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,248,236,.88);
+      backdrop-filter: blur(18px);
+      z-index: 10;
     }
 
-    main { padding: 38px; width: 100%; max-width: 1200px; margin: 0 auto; }
+    main {
+      width: min(1380px, 100%);
+      margin: 0 auto;
+      padding: 30px;
+    }
 
-    /* Responsive adjustments */
+    .logo {
+      position: relative;
+      text-align: center;
+      padding: 26px 16px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(rgba(255,248,236,.84), rgba(255,248,236,.84)),
+        radial-gradient(circle at 22% 18%, var(--rose-soft), transparent 34%),
+        radial-gradient(circle at 90% 88%, var(--butter), transparent 38%);
+      box-shadow: var(--shadow);
+    }
+
+    .logo small {
+      display: block;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #9b3d5a;
+      font-family: "Playfair Display", serif;
+      font-size: .75rem;
+      font-weight: 800;
+    }
+
+    .logo h1 {
+      margin: 2px 0 0;
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      font-size: 2.35rem;
+      line-height: .92;
+      color: #8d2f46;
+      text-shadow: 2px 2px 0 white;
+      letter-spacing: -.04em;
+    }
+
+    .logo .flourish {
+      width: 100%;
+      height: 24px;
+      margin-top: 8px;
+      color: var(--gold);
+    }
+
+    nav {
+      margin-top: 18px;
+      display: grid;
+      gap: 9px;
+    }
+
+    nav button, .btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.58);
+      color: var(--ink);
+      border-radius: 16px;
+      padding: 13px 14px;
+      text-align: left;
+      font: 700 1.02rem "Cormorant Garamond", Georgia, serif;
+      cursor: pointer;
+      transition: .22s ease;
+      box-shadow: 0 8px 18px rgba(87,55,44,.07);
+      text-decoration: none;
+    }
+
+    nav button {
+      display: grid;
+      grid-template-columns: 30px 30px 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav button:hover, .btn:hover {
+      background: linear-gradient(135deg, var(--rose-soft), #fff4c9);
+      transform: translateY(-1px);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .side-icon, .card-icon, .tiny-icon {
+      width: 26px;
+      height: 26px;
+      color: var(--gold);
+      flex: 0 0 auto;
+    }
+
+    .card-icon {
+      width: 72px;
+      height: 72px;
+      color: var(--theme-ink);
+      filter: drop-shadow(0 10px 12px rgba(87,55,44,.12));
+    }
+
+    .tiny-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg {
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .page { display: none; animation: fade .35s ease; }
+    .page.active { display: block; }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      padding: clamp(24px, 3vw, 38px);
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(255,248,236,.9), rgba(255,248,236,.9)),
+        radial-gradient(circle at 6% 5%, rgba(255,215,223,.68), transparent 22%),
+        radial-gradient(circle at 96% 96%, rgba(255,229,138,.58), transparent 24%);
+      box-shadow: var(--shadow);
+    }
+
+    .course-theme {
+      background:
+        linear-gradient(rgba(255,248,236,.86), rgba(255,248,236,.86)),
+        radial-gradient(circle at 8% 5%, var(--theme-a), transparent 24%),
+        radial-gradient(circle at 94% 15%, var(--theme-b), transparent 25%),
+        radial-gradient(circle at 50% 100%, var(--theme-c), transparent 30%);
+    }
+
+    .kicker {
+      color: #8a5b4b;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font: 800 .78rem "Playfair Display", serif;
+    }
+
+    h2, h3, .display-title { font-family: "Playfair Display", serif; }
+
+    .hero-title {
+      text-align: center;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      margin: 0;
+      font-weight: 800;
+      color: #7d2f3e;
+      line-height: .94;
+      text-shadow: 2px 2px 0 #fff;
+      letter-spacing: -.06em;
+    }
+
+    h2 { font-size: 2.55rem; margin: 0 0 16px; color: #7d2f3e; font-weight: 800; letter-spacing: -.035em; }
+    h3 { font-size: 1.45rem; margin: 0 0 10px; color: #7d2f3e; font-weight: 800; letter-spacing: -.02em; }
+    p { line-height: 1.65; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .side-emoji {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.58);
+      border: 1px solid var(--line);
+      font-size: 1rem;
+      filter: grayscale(.58) sepia(.22) saturate(.75) opacity(.78);
+      transition: .25s ease;
+    }
+
+    nav button:hover .side-emoji {
+      filter: none;
+      transform: scale(1.08);
+      background: radial-gradient(circle at 35% 30%, #fff, var(--butter), var(--rose-soft));
+    }
+
     @media (max-width: 980px) {
-      .nav-toggle { display: block; }
       .app { grid-template-columns: 1fr; }
-      aside { display: none; position: fixed; inset: 0; width: 100%; height: 100%; z-index: 90; }
-      aside.active { display: block; }
-      main { padding: 70px 18px 20px 18px; }
-      .hero, .two, .calendar-shell, .grid { grid-template-columns: 1fr; }
+      aside { position: relative; height: auto; }
+      main { padding: 18px; }
+      .hero, .two, .calendar-shell { grid-template-columns: 1fr; }
     }
-
-    /* ... [Include all your original remaining CSS here] ... */
   </style>
 </head>
 
 <body>
-  <button class="nav-toggle" onclick="toggleNav()">☰</button>
-
-  <div class="app">
-    <aside id="sidebar">
-       <!-- ... [Keep your existing nav menu code here] ... -->
-    </aside>
-
-    <main>
-      <!-- ... [Keep your existing sections here] ... -->
-    </main>
-  </div>
-
+  <!-- Add your template and script content here to complete the page -->
   <script>
-    function toggleNav() { document.getElementById("sidebar").classList.toggle("active"); }
-
-    function showPage(id, preserveScroll = false) {
+    function showPage(id) {
       document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
       document.getElementById(id).classList.add("active");
-      
-      // Close menu on mobile
-      if (window.innerWidth <= 980) document.getElementById("sidebar").classList.remove("active");
-      
-      if (!preserveScroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
-    
-    // ... [Keep your existing script logic] ...
   </script>
 </body>
 </html>
+
