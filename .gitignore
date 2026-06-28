@@ -1,0 +1,25 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+
+# Dependency folders
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Backups
+*.zip
+buttercup-backup.json
